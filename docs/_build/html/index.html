@@ -1,0 +1,1543 @@
+
+
+<!doctype html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>idpmodem Library Documentation &#8212; idpmodem 1.1.8 documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">idpmodem 1.1.8 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="docutils literal notranslate"><span class="pre">idpmodem</span></code> Library Documentation</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="idpmodem-library-documentation">
+<h1><code class="docutils literal notranslate"><span class="pre">idpmodem</span></code> Library Documentation<a class="headerlink" href="#idpmodem-library-documentation" title="Permalink to this headline">¶</a></h1>
+<p>This Python (3.7+) library is a reference design for interfacing an edge device
+to an <a class="reference external" href="https://www.inmarsat.com">Inmarsat</a> Type Approved modem
+designed to operate on the <em>IsatData Pro</em> satellite IoT messaging service.</p>
+<div class="toctree-wrapper compound">
+</div>
+<div class="section" id="module-idpmodem.atcommand_async">
+<span id="atcommand-async"></span><h2>atcommand_async<a class="headerlink" href="#module-idpmodem.atcommand_async" title="Permalink to this headline">¶</a></h2>
+<p>AT command protocol (asyncio) for Inmarsat IDP satellite messaging modems.</p>
+<p>This module provides an async serial interface that sends and receives
+AT commands, decoding/abstracting typically used operations.
+Based on the AioSerial package.</p>
+<p>Example usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">import</span> <span class="nn">idpmodem</span>
+
+<span class="n">mymodem</span> <span class="o">=</span> <span class="n">idpmodem</span><span class="o">.</span><span class="n">IdpModemAsyncioClient</span><span class="p">()</span>
+<span class="n">initialized</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">mymodem</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">crc</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+</pre></div>
+</div>
+<dl class="py class">
+<dt id="idpmodem.atcommand_async.IdpModemAsyncioClient">
+<em class="property">class </em><code class="sig-prename descclassname">idpmodem.atcommand_async.</code><code class="sig-name descname">IdpModemAsyncioClient</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">port</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'/dev/ttyUSB0'</span></em>, <em class="sig-param"><span class="n">baudrate</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">9600</span></em>, <em class="sig-param"><span class="n">loop</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>asyncio.events.AbstractEventLoop<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">logger</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>logging.Logger<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">log_level</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">20</span></em><span class="sig-paren">)</span><a class="headerlink" href="#idpmodem.atcommand_async.IdpModemAsyncioClient" title="Permalink to this definition">¶</a></dt>
+<dd><p>A satellite IoT messaging modem on Inmarsat’s IsatData Pro service.</p>
+<dl class="py attribute">
+<dt id="idpmodem.atcommand_async.IdpModemAsyncioClient.port">
+<code class="sig-name descname">port</code><a class="headerlink" href="#idpmodem.atcommand_async.IdpModemAsyncioClient.port" title="Permalink to this definition">¶</a></dt>
+<dd><p>The serial port name e.g. <cite>/dev/ttyUSB0</cite></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="idpmodem.atcommand_async.IdpModemAsyncioClient.baudrate">
+<code class="sig-name descname">baudrate</code><a class="headerlink" href="#idpmodem.atcommand_async.IdpModemAsyncioClient.baudrate" title="Permalink to this definition">¶</a></dt>
+<dd><p>The baudrate of the serial port e.g. <cite>9600</cite></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="idpmodem.atcommand_async.IdpModemAsyncioClient.crc">
+<code class="sig-name descname">crc</code><a class="headerlink" href="#idpmodem.atcommand_async.IdpModemAsyncioClient.crc" title="Permalink to this definition">¶</a></dt>
+<dd><p>A boolean used if CRC-16 is enabled for long serial cables</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="idpmodem.atcommand_async.IdpModemAsyncioClient.loop">
+<code class="sig-name descname">loop</code><a class="headerlink" href="#idpmodem.atcommand_async.IdpModemAsyncioClient.loop" title="Permalink to this definition">¶</a></dt>
+<dd><p>The asyncio event loop (uses default if not provided)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="idpmodem.atcommand_async.IdpModemAsyncioClient.command">
+<em class="property">async </em><code class="sig-name descname">command</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">at_command</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">timeout</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">5</span></em>, <em class="sig-param"><span class="n">retries</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em><span class="sig-paren">)</span> &#x2192; list<a class="headerlink" href="#idpmodem.atcommand_async.IdpModemAsyncioClient.command" title="Permalink to this definition">¶</a></dt>
+<dd><p>Submits an AT command and returns the response asynchronously.</p>
+<p>Proxies a private function to allow for multi-threaded operation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>at_command</strong> – The AT command string</p></li>
+<li><p><strong>timeout</strong> – The maximum time in seconds to await a response.</p></li>
+<li><p><strong>retries</strong> – Optional number of additional attempts on failure.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>A list of response strings finishing with ‘OK’, or</dt><dd><p>[‘ERROR’, ‘&lt;error_code&gt;’]</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>AtException if no response was received.</strong> – </p></li>
+<li><p><strong>AtException if bad CRC response count exceeds retries</strong> – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="idpmodem.atcommand_async.IdpModemAsyncioClient.config_crc_enable">
+<em class="property">async </em><code class="sig-name descname">config_crc_enable</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">crc</span><span class="p">:</span> <span class="n">bool</span></em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#idpmodem.atcommand_async.IdpModemAsyncioClient.config_crc_enable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Enables or disables CRC error checking (for long serial cable).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>crc</strong> – enable CRC if true</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="idpmodem.atcommand_async.IdpModemAsyncioClient.config_report">
+<em class="property">async </em><code class="sig-name descname">config_report</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>dict<span class="p">, </span>dict<span class="p">]</span><a class="headerlink" href="#idpmodem.atcommand_async.IdpModemAsyncioClient.config_report" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sends the AT&amp;V command to retrive S-register settings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A tuple with two dictionaries or both None if failed
+at_config with booleans crc, echo, quiet and verbose
+reg_config with S-register tags and integer values</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="idpmodem.atcommand_async.IdpModemAsyncioClient.config_restore_factory">
+<em class="property">async </em><code class="sig-name descname">config_restore_factory</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#idpmodem.atcommand_async.IdpModemAsyncioClient.config_restore_factory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sends the AT&amp;F command and returns True on success.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="idpmodem.atcommand_async.IdpModemAsyncioClient.config_restore_nvm">
+<em class="property">async </em><code class="sig-name descname">config_restore_nvm</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#idpmodem.atcommand_async.IdpModemAsyncioClient.config_restore_nvm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sends the ATZ command to restore from non-volatile memory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Boolean success.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="idpmodem.atcommand_async.IdpModemAsyncioClient.config_save">
+<em class="property">async </em><code class="sig-name descname">config_save</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#idpmodem.atcommand_async.IdpModemAsyncioClient.config_save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sends the AT&amp;W command and returns True if successful.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="idpmodem.atcommand_async.IdpModemAsyncioClient.device_mobile_id">
+<em class="property">async </em><code class="sig-name descname">device_mobile_id</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#idpmodem.atcommand_async.IdpModemAsyncioClient.device_mobile_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the unique Mobile ID (Inmarsat serial number).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>MobileID string.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="#idpmodem.aterror.AtException" title="idpmodem.aterror.AtException"><strong>AtException</strong></a> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="idpmodem.atcommand_async.IdpModemAsyncioClient.device_version">
+<em class="property">async </em><code class="sig-name descname">device_version</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>str<span class="p">, </span>str<span class="p">, </span>str<span class="p">]</span><a class="headerlink" href="#idpmodem.atcommand_async.IdpModemAsyncioClient.device_version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the hardware, firmware and AT versions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Dict with hardware, firmware, at version.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="#idpmodem.aterror.AtException" title="idpmodem.aterror.AtException"><strong>AtException</strong></a> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="idpmodem.atcommand_async.IdpModemAsyncioClient.event_get">
+<em class="property">async </em><code class="sig-name descname">event_get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="p">:</span> <span class="n">tuple</span></em>, <em class="sig-param"><span class="n">raw</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span> &#x2192; Union<span class="p">[</span>str<span class="p">, </span>dict<span class="p">]</span><a class="headerlink" href="#idpmodem.atcommand_async.IdpModemAsyncioClient.event_get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the cached event by class/subclass.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>event</strong> – tuple of (class, subclass)</p></li>
+<li><p><strong>raw</strong> – Returns the raw text string if True</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>String if raw=True, dictionary if raw=False</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#idpmodem.aterror.AtException" title="idpmodem.aterror.AtException"><strong>AtException</strong></a> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="idpmodem.atcommand_async.IdpModemAsyncioClient.event_monitor_get">
+<em class="property">async </em><code class="sig-name descname">event_monitor_get</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; list<a class="headerlink" href="#idpmodem.atcommand_async.IdpModemAsyncioClient.event_monitor_get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of monitored/cached events.
+As a list of &lt;class.subclass&gt; strings which includes an asterisk
+for each new event that can be retrieved.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>list of strings &lt;class.subclass[*]&gt; or None</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="#idpmodem.aterror.AtException" title="idpmodem.aterror.AtException"><strong>AtException</strong></a> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="idpmodem.atcommand_async.IdpModemAsyncioClient.event_monitor_set">
+<em class="property">async </em><code class="sig-name descname">event_monitor_set</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">eventlist</span><span class="p">:</span> <span class="n">list</span></em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#idpmodem.atcommand_async.IdpModemAsyncioClient.event_monitor_set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets trace events to monitor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>eventlist</strong> – list of tuples (class, subclass)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if successfully set</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="idpmodem.atcommand_async.IdpModemAsyncioClient.gnss_continuous_set">
+<em class="property">async </em><code class="sig-name descname">gnss_continuous_set</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">interval</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">doppler</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#idpmodem.atcommand_async.IdpModemAsyncioClient.gnss_continuous_set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the GNSS continous mode (0 = on-demand).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>interval</strong> – Seconds between GNSS refresh.</p></li>
+<li><p><strong>doppler</strong> – Often required for moving assets.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if successful setting.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="idpmodem.atcommand_async.IdpModemAsyncioClient.gnss_nmea_get">
+<em class="property">async </em><code class="sig-name descname">gnss_nmea_get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">stale_secs</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">1</span></em>, <em class="sig-param"><span class="n">wait_secs</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">35</span></em>, <em class="sig-param"><span class="n">sentences</span><span class="p">:</span> <span class="n">list</span> <span class="o">=</span> <span class="default_value">['RMC', 'GSA', 'GGA', 'GSV']</span></em><span class="sig-paren">)</span> &#x2192; Union<span class="p">[</span>list<span class="p">, </span>str<span class="p">]</span><a class="headerlink" href="#idpmodem.atcommand_async.IdpModemAsyncioClient.gnss_nmea_get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of NMEA-formatted sentences from GNSS.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>stale_secs</strong> – Maximum age of fix in seconds (1..600)</p></li>
+<li><p><strong>wait_secs</strong> – Maximum time to wait for fix (1..600)</p></li>
+<li><p><strong>sentences</strong> – Optional list of NMEA sentence types to get</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List of NMEA sentences</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ValueError if parameter out of range</strong> – </p></li>
+<li><p><strong>AtGnssTimeout if no response from GNSS</strong> – </p></li>
+<li><p><a class="reference internal" href="#idpmodem.aterror.AtException" title="idpmodem.aterror.AtException"><strong>AtException</strong></a> – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="idpmodem.atcommand_async.IdpModemAsyncioClient.initialize">
+<em class="property">async </em><code class="sig-name descname">initialize</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">crc</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#idpmodem.atcommand_async.IdpModemAsyncioClient.initialize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initializes the modem using ATZ and sets up CRC.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>crc</strong> – desired initial CRC enabled if True</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if successful</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>AtException on errors other than CRC enabled</strong> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="idpmodem.atcommand_async.IdpModemAsyncioClient.location">
+<em class="property">async </em><code class="sig-name descname">location</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">stale_secs</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">1</span></em>, <em class="sig-param"><span class="n">wait_secs</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">35</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#idpmodem.nmea.Location" title="idpmodem.nmea.Location">idpmodem.nmea.Location</a><a class="headerlink" href="#idpmodem.atcommand_async.IdpModemAsyncioClient.location" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a location object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>stale_secs</strong> – the maximum fix age to accept</p></li>
+<li><p><strong>wait_secs</strong> – the maximum time to wait for a new fix</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>nmea.Location object</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>AtGnssTimeout if no location data is available</strong> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="idpmodem.atcommand_async.IdpModemAsyncioClient.lowpower_mode_get">
+<em class="property">async </em><code class="sig-name descname">lowpower_mode_get</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#idpmodem.atcommand_async.IdpModemAsyncioClient.lowpower_mode_get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the modem power mode.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The integer value of the power mode</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>AtException if an error was returned</strong> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="idpmodem.atcommand_async.IdpModemAsyncioClient.lowpower_mode_set">
+<em class="property">async </em><code class="sig-name descname">lowpower_mode_set</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">power_mode</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#idpmodem.atcommand_async.IdpModemAsyncioClient.lowpower_mode_set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the modem power mode (for blockage recovery).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>power_mode</strong> (<em>int</em>) – The new power mode</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if successful</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>ValueError on invalid power_mode</strong> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="idpmodem.atcommand_async.IdpModemAsyncioClient.lowpower_notifications_check">
+<em class="property">async </em><code class="sig-name descname">lowpower_notifications_check</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; list<a class="headerlink" href="#idpmodem.atcommand_async.IdpModemAsyncioClient.lowpower_notifications_check" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of relevant events.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="idpmodem.atcommand_async.IdpModemAsyncioClient.lowpower_notifications_enable">
+<em class="property">async </em><code class="sig-name descname">lowpower_notifications_enable</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#idpmodem.atcommand_async.IdpModemAsyncioClient.lowpower_notifications_enable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configures low power satellite status and notification assertion.</p>
+<p>The following events trigger assertion of the notification output:
+- New Forward Message received
+- Return Message completed (success or failure)
+- Trace event update (satellite status change)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if successful</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="idpmodem.atcommand_async.IdpModemAsyncioClient.lowpower_wakeup_get">
+<em class="property">async </em><code class="sig-name descname">lowpower_wakeup_get</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#idpmodem.atcommand_async.IdpModemAsyncioClient.lowpower_wakeup_get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the modem wakeup period.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The integer value of the wakeup period</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>AtException if an error was returned</strong> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="idpmodem.atcommand_async.IdpModemAsyncioClient.lowpower_wakeup_set">
+<em class="property">async </em><code class="sig-name descname">lowpower_wakeup_set</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">wakeup_period</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#idpmodem.atcommand_async.IdpModemAsyncioClient.lowpower_wakeup_set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the modem wakeup period.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>wakeup_period</strong> (<em>int</em>) – The new wakeup period</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if successful</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>ValueError on invalid wakeup_period</strong> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="idpmodem.atcommand_async.IdpModemAsyncioClient.message_mo_cancel">
+<em class="property">async </em><code class="sig-name descname">message_mo_cancel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#idpmodem.atcommand_async.IdpModemAsyncioClient.message_mo_cancel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cancels a mobile-originated message in the Tx ready state.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="idpmodem.atcommand_async.IdpModemAsyncioClient.message_mo_clear">
+<em class="property">async </em><code class="sig-name descname">message_mo_clear</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#idpmodem.atcommand_async.IdpModemAsyncioClient.message_mo_clear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clears the modem transmit queue.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Count of messages deleted</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="#idpmodem.aterror.AtException" title="idpmodem.aterror.AtException"><strong>AtException</strong></a> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="idpmodem.atcommand_async.IdpModemAsyncioClient.message_mo_formatted_send">
+<em class="property">async </em><code class="sig-name descname">message_mo_formatted_send</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">message</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#idpmodem.message.MobileOriginatedMessage" title="idpmodem.message.MobileOriginatedMessage">idpmodem.message.MobileOriginatedMessage</a></span></em><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#idpmodem.atcommand_async.IdpModemAsyncioClient.message_mo_formatted_send" title="Permalink to this definition">¶</a></dt>
+<dd><p>Submits a MobileOriginatedMessage.</p>
+<p>TODO: not implemented</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>message</strong> – A MobileOriginatedMessage object</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Name of the message if successful, or the error string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="idpmodem.atcommand_async.IdpModemAsyncioClient.message_mo_send">
+<em class="property">async </em><code class="sig-name descname">message_mo_send</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">data_format</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">sin</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">min</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>int<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">priority</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">4</span></em><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#idpmodem.atcommand_async.IdpModemAsyncioClient.message_mo_send" title="Permalink to this definition">¶</a></dt>
+<dd><p>Submits a mobile-originated message to send.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> – </p></li>
+<li><p><strong>data_format</strong> – </p></li>
+<li><p><strong>name</strong> – </p></li>
+<li><p><strong>priority</strong> – </p></li>
+<li><p><strong>sin</strong> – </p></li>
+<li><p><strong>min</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Name of the message if successful, or the error string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="idpmodem.atcommand_async.IdpModemAsyncioClient.message_mo_state">
+<em class="property">async </em><code class="sig-name descname">message_mo_state</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; list<a class="headerlink" href="#idpmodem.atcommand_async.IdpModemAsyncioClient.message_mo_state" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the message state(s) requested.</p>
+<p>If no name filter is passed in, all available messages states
+are returned.  Returns False is the request failed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> – The unique message name in the modem queue</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><cite>list</cite> of <cite>dict</cite> with <cite>name</cite>, <cite>state</cite>, <cite>size</cite> and <cite>sent</cite></p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#idpmodem.aterror.AtException" title="idpmodem.aterror.AtException"><strong>AtException</strong></a> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="idpmodem.atcommand_async.IdpModemAsyncioClient.message_mt_delete">
+<em class="property">async </em><code class="sig-name descname">message_mt_delete</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#idpmodem.atcommand_async.IdpModemAsyncioClient.message_mt_delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Marks a Return message for deletion by the modem.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> – The unique mobile-terminated name in the queue</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if the operation succeeded</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="idpmodem.atcommand_async.IdpModemAsyncioClient.message_mt_formatted_get">
+<em class="property">async </em><code class="sig-name descname">message_mt_formatted_get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#idpmodem.message.MobileTerminatedMessage" title="idpmodem.message.MobileTerminatedMessage">idpmodem.message.MobileTerminatedMessage</a><a class="headerlink" href="#idpmodem.atcommand_async.IdpModemAsyncioClient.message_mt_formatted_get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retreives a decoded mobile-terminated message from the receive queue.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> – The unique name in the modem queue e.g. FM01.01</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The MobileTerminatedMessage</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="idpmodem.atcommand_async.IdpModemAsyncioClient.message_mt_get">
+<em class="property">async </em><code class="sig-name descname">message_mt_get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">data_format</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">3</span></em>, <em class="sig-param"><span class="n">verbose</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span> &#x2192; Union<span class="p">[</span>dict<span class="p">, </span>bytes<span class="p">]</span><a class="headerlink" href="#idpmodem.atcommand_async.IdpModemAsyncioClient.message_mt_get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the payload of a specified mobile-terminated message.</p>
+<p>Payload is presented as a string with encoding based on data_format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – The unique name in the modem queue e.g. FM01.01</p></li>
+<li><p><strong>data_format</strong> – text=1, hex=2, base64=3 (default)</p></li>
+<li><p><strong>verbose</strong> – if True returns a dictionary, otherwise raw payload bytes</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The encoded data as a string</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#idpmodem.aterror.AtException" title="idpmodem.aterror.AtException"><strong>AtException</strong></a> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="idpmodem.atcommand_async.IdpModemAsyncioClient.message_mt_waiting">
+<em class="property">async </em><code class="sig-name descname">message_mt_waiting</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; list<a class="headerlink" href="#idpmodem.atcommand_async.IdpModemAsyncioClient.message_mt_waiting" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of received mobile-terminated message information.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>List of (name, number, priority, sin, state, length, received)</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="#idpmodem.aterror.AtException" title="idpmodem.aterror.AtException"><strong>AtException</strong></a> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="idpmodem.atcommand_async.IdpModemAsyncioClient.notification_check">
+<em class="property">async </em><code class="sig-name descname">notification_check</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; collections.OrderedDict<a class="headerlink" href="#idpmodem.atcommand_async.IdpModemAsyncioClient.notification_check" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the current active event notification bitmask (S89).</p>
+<p>The value of S89 register is cleared upon reading.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>OrderedDict</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="#idpmodem.aterror.AtException" title="idpmodem.aterror.AtException"><strong>AtException</strong></a> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="idpmodem.atcommand_async.IdpModemAsyncioClient.notification_control_get">
+<em class="property">async </em><code class="sig-name descname">notification_control_get</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; collections.OrderedDict<a class="headerlink" href="#idpmodem.atcommand_async.IdpModemAsyncioClient.notification_control_get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the current notification configuration bitmask.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>OrderedDict</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="#idpmodem.aterror.AtException" title="idpmodem.aterror.AtException"><strong>AtException</strong></a> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="idpmodem.atcommand_async.IdpModemAsyncioClient.notification_control_set">
+<em class="property">async </em><code class="sig-name descname">notification_control_set</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event_map</span><span class="p">:</span> <span class="n">list</span></em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#idpmodem.atcommand_async.IdpModemAsyncioClient.notification_control_set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the event notification bitmask.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>event_map</strong> – list of tuples (event_name, bool)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if successful.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="idpmodem.atcommand_async.IdpModemAsyncioClient.s_register_get">
+<em class="property">async </em><code class="sig-name descname">s_register_get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">register</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; Optional<span class="p">[</span>int<span class="p">]</span><a class="headerlink" href="#idpmodem.atcommand_async.IdpModemAsyncioClient.s_register_get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the value of the S-register requested.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>register</strong> – The S-register number</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>integer value of register</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#idpmodem.aterror.AtException" title="idpmodem.aterror.AtException"><strong>AtException</strong></a> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="idpmodem.atcommand_async.IdpModemAsyncioClient.s_register_get_all">
+<em class="property">async </em><code class="sig-name descname">s_register_get_all</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; list<a class="headerlink" href="#idpmodem.atcommand_async.IdpModemAsyncioClient.s_register_get_all" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of S-register definitions.
+R=read-only, S=signed, V=volatile</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>tuple(register, RSV, current, default, minimum, maximum)</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="#idpmodem.aterror.AtException" title="idpmodem.aterror.AtException"><strong>AtException</strong></a> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="idpmodem.atcommand_async.IdpModemAsyncioClient.sat_status_name">
+<em class="property">static </em><code class="sig-name descname">sat_status_name</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ctrl_state</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#idpmodem.atcommand_async.IdpModemAsyncioClient.sat_status_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns human-readable definition of a control state value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>ValueError if ctrl_state is not found.</strong> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="idpmodem.atcommand_async.IdpModemAsyncioClient.satellite_status">
+<em class="property">async </em><code class="sig-name descname">satellite_status</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#idpmodem.atcommand_async.IdpModemAsyncioClient.satellite_status" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the control state and C/No.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><dl class="simple">
+<dt>Dictionary with state (int), snr (float), beamsearch (int),</dt><dd><p>state_name (str), beamsearch_name (str), or None if error.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="#idpmodem.aterror.AtException" title="idpmodem.aterror.AtException"><strong>AtException</strong></a> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="idpmodem.atcommand_async.IdpModemAsyncioClient.shutdown">
+<em class="property">async </em><code class="sig-name descname">shutdown</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#idpmodem.atcommand_async.IdpModemAsyncioClient.shutdown" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tell the modem to prepare for power-down.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="idpmodem.atcommand_async.IdpModemAsyncioClient.time_utc">
+<em class="property">async </em><code class="sig-name descname">time_utc</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#idpmodem.atcommand_async.IdpModemAsyncioClient.time_utc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns current UTC time of the modem in ISO format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>UTC as ISO-formatted string</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="#idpmodem.aterror.AtException" title="idpmodem.aterror.AtException"><strong>AtException</strong></a> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="idpmodem.atcommand_async.IdpModemAsyncioClient.transmit_status">
+<em class="property">async </em><code class="sig-name descname">transmit_status</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#idpmodem.atcommand_async.IdpModemAsyncioClient.transmit_status" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the transmitter status.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Transmit status (5 = OK)</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>AtException if error returned by modem</strong> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-idpmodem.aterror">
+<span id="aterror"></span><h2>aterror<a class="headerlink" href="#module-idpmodem.aterror" title="Permalink to this headline">¶</a></h2>
+<p>Base classes for AT command errors.</p>
+<dl class="py exception">
+<dt id="idpmodem.aterror.AtBusy">
+<em class="property">exception </em><code class="sig-prename descclassname">idpmodem.aterror.</code><code class="sig-name descname">AtBusy</code><a class="headerlink" href="#idpmodem.aterror.AtBusy" title="Permalink to this definition">¶</a></dt>
+<dd><p>The modem is busy processing a prior AT command.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="idpmodem.aterror.AtCrcConfigError">
+<em class="property">exception </em><code class="sig-prename descclassname">idpmodem.aterror.</code><code class="sig-name descname">AtCrcConfigError</code><a class="headerlink" href="#idpmodem.aterror.AtCrcConfigError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Indicates a CRC response was received when none expected or vice versa.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="idpmodem.aterror.AtCrcError">
+<em class="property">exception </em><code class="sig-prename descclassname">idpmodem.aterror.</code><code class="sig-name descname">AtCrcError</code><a class="headerlink" href="#idpmodem.aterror.AtCrcError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Indicates a detected CRC mismatch on a response.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="idpmodem.aterror.AtException">
+<em class="property">exception </em><code class="sig-prename descclassname">idpmodem.aterror.</code><code class="sig-name descname">AtException</code><a class="headerlink" href="#idpmodem.aterror.AtException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base class for AT command exceptions.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="idpmodem.aterror.AtGnssTimeout">
+<em class="property">exception </em><code class="sig-prename descclassname">idpmodem.aterror.</code><code class="sig-name descname">AtGnssTimeout</code><a class="headerlink" href="#idpmodem.aterror.AtGnssTimeout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Indicates a timeout waiting for a GNSS fix.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="idpmodem.aterror.AtTimeout">
+<em class="property">exception </em><code class="sig-prename descclassname">idpmodem.aterror.</code><code class="sig-name descname">AtTimeout</code><a class="headerlink" href="#idpmodem.aterror.AtTimeout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Indicates a timeout waiting for response.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="idpmodem.aterror.AtUnsolicited">
+<em class="property">exception </em><code class="sig-prename descclassname">idpmodem.aterror.</code><code class="sig-name descname">AtUnsolicited</code><a class="headerlink" href="#idpmodem.aterror.AtUnsolicited" title="Permalink to this definition">¶</a></dt>
+<dd><p>Indicates unsolicited data was received from the modem.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-idpmodem.nmea">
+<span id="nmea"></span><h2>nmea<a class="headerlink" href="#module-idpmodem.nmea" title="Permalink to this headline">¶</a></h2>
+<p>Utilities for validating and parsing NMEA data into a <cite>Location</cite> object.</p>
+<dl class="py class">
+<dt id="idpmodem.nmea.Location">
+<em class="property">class </em><code class="sig-prename descclassname">idpmodem.nmea.</code><code class="sig-name descname">Location</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">latitude</span><span class="o">=</span><span class="default_value">90.0</span></em>, <em class="sig-param"><span class="n">longitude</span><span class="o">=</span><span class="default_value">180.0</span></em>, <em class="sig-param"><span class="n">altitude</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">speed</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">heading</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">timestamp</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">satellites</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">fix_type</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#idpmodem.nmea.Location" title="Permalink to this definition">¶</a></dt>
+<dd><p>A set of location-based information for a given point in time.</p>
+<p>Uses 90.0/180.0 if latitude/longitude are unknown</p>
+<dl class="py attribute">
+<dt id="idpmodem.nmea.Location.latitude">
+<code class="sig-name descname">latitude</code><a class="headerlink" href="#idpmodem.nmea.Location.latitude" title="Permalink to this definition">¶</a></dt>
+<dd><p>decimal degrees</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="idpmodem.nmea.Location.longitude">
+<code class="sig-name descname">longitude</code><a class="headerlink" href="#idpmodem.nmea.Location.longitude" title="Permalink to this definition">¶</a></dt>
+<dd><p>decimal degrees</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="idpmodem.nmea.Location.altitude">
+<code class="sig-name descname">altitude</code><a class="headerlink" href="#idpmodem.nmea.Location.altitude" title="Permalink to this definition">¶</a></dt>
+<dd><p>in metres</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="idpmodem.nmea.Location.speed">
+<code class="sig-name descname">speed</code><a class="headerlink" href="#idpmodem.nmea.Location.speed" title="Permalink to this definition">¶</a></dt>
+<dd><p>in knots</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="idpmodem.nmea.Location.heading">
+<code class="sig-name descname">heading</code><a class="headerlink" href="#idpmodem.nmea.Location.heading" title="Permalink to this definition">¶</a></dt>
+<dd><p>in degrees</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="idpmodem.nmea.Location.timestamp">
+<code class="sig-name descname">timestamp</code><a class="headerlink" href="#idpmodem.nmea.Location.timestamp" title="Permalink to this definition">¶</a></dt>
+<dd><p>in seconds since 1970-01-01T00:00:00Z</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="idpmodem.nmea.Location.satellites">
+<code class="sig-name descname">satellites</code><a class="headerlink" href="#idpmodem.nmea.Location.satellites" title="Permalink to this definition">¶</a></dt>
+<dd><p>in view at time of fix</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="idpmodem.nmea.Location.fix_type">
+<code class="sig-name descname">fix_type</code><a class="headerlink" href="#idpmodem.nmea.Location.fix_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>1=None, 2=2D or 3=3D</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="idpmodem.nmea.Location.pdop">
+<code class="sig-name descname">pdop</code><a class="headerlink" href="#idpmodem.nmea.Location.pdop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Probability Dilution of Precision</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="idpmodem.nmea.Location.hdop">
+<code class="sig-name descname">hdop</code><a class="headerlink" href="#idpmodem.nmea.Location.hdop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Horizontal Dilution of Precision</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="idpmodem.nmea.Location.vdop">
+<code class="sig-name descname">vdop</code><a class="headerlink" href="#idpmodem.nmea.Location.vdop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Vertical Dilution of Precision</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="idpmodem.nmea.Location.time_iso">
+<code class="sig-name descname">time_iso</code><a class="headerlink" href="#idpmodem.nmea.Location.time_iso" title="Permalink to this definition">¶</a></dt>
+<dd><p>ISO 8601 formatted timestamp</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="idpmodem.nmea.Location.satellites_info">
+<code class="sig-name descname">satellites_info</code><a class="headerlink" href="#idpmodem.nmea.Location.satellites_info" title="Permalink to this definition">¶</a></dt>
+<dd><p><cite>GnssSatelliteInfo</cite></p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="idpmodem.nmea.Location.GnssSatelliteInfo">
+<em class="property">class </em><code class="sig-name descname">GnssSatelliteInfo</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">prn</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">elevation</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">azimuth</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">snr</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="headerlink" href="#idpmodem.nmea.Location.GnssSatelliteInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Information specific to a GNSS satellite.</p>
+<dl class="py attribute">
+<dt id="idpmodem.nmea.Location.GnssSatelliteInfo.prn">
+<code class="sig-name descname">prn</code><a class="headerlink" href="#idpmodem.nmea.Location.GnssSatelliteInfo.prn" title="Permalink to this definition">¶</a></dt>
+<dd><p>The PRN code (Pseudo-Random Number sequence)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="idpmodem.nmea.Location.GnssSatelliteInfo.elevation">
+<code class="sig-name descname">elevation</code><a class="headerlink" href="#idpmodem.nmea.Location.GnssSatelliteInfo.elevation" title="Permalink to this definition">¶</a></dt>
+<dd><p>The satellite elevation</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="idpmodem.nmea.Location.GnssSatelliteInfo.azimuth">
+<code class="sig-name descname">azimuth</code><a class="headerlink" href="#idpmodem.nmea.Location.GnssSatelliteInfo.azimuth" title="Permalink to this definition">¶</a></dt>
+<dd><p>The satellite azimuth</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="idpmodem.nmea.Location.GnssSatelliteInfo.snr">
+<code class="sig-name descname">snr</code><a class="headerlink" href="#idpmodem.nmea.Location.GnssSatelliteInfo.snr" title="Permalink to this definition">¶</a></dt>
+<dd><p>The satellite Signal-to-Noise Ratio</p>
+</dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt id="idpmodem.nmea.NmeaChecksumError">
+<em class="property">exception </em><code class="sig-prename descclassname">idpmodem.nmea.</code><code class="sig-name descname">NmeaChecksumError</code><a class="headerlink" href="#idpmodem.nmea.NmeaChecksumError" title="Permalink to this definition">¶</a></dt>
+<dd><p>NMEA sentence checksum error.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="idpmodem.nmea.NmeaException">
+<em class="property">exception </em><code class="sig-prename descclassname">idpmodem.nmea.</code><code class="sig-name descname">NmeaException</code><a class="headerlink" href="#idpmodem.nmea.NmeaException" title="Permalink to this definition">¶</a></dt>
+<dd><p>An exception triggered during NMEA sentence parsing.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="idpmodem.nmea.NmeaInvalid">
+<em class="property">exception </em><code class="sig-prename descclassname">idpmodem.nmea.</code><code class="sig-name descname">NmeaInvalid</code><a class="headerlink" href="#idpmodem.nmea.NmeaInvalid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Invalid NMEA sentence.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="idpmodem.nmea.location_get">
+<code class="sig-prename descclassname">idpmodem.nmea.</code><code class="sig-name descname">location_get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">nmea_data_set</span><span class="p">:</span> <span class="n">list</span></em>, <em class="sig-param"><span class="n">degrees_resolution</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">6</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#idpmodem.nmea.Location" title="idpmodem.nmea.Location">idpmodem.nmea.Location</a><a class="headerlink" href="#idpmodem.nmea.location_get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a Location object based on an NMEA sentences data set.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nmea_data_set</strong> – A list of valid NMEA sentences</p></li>
+<li><p><strong>degrees_resolution</strong> – The desired precision of latitude/longitude</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A <cite>Location</cite> object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="idpmodem.nmea.validate_nmea_checksum">
+<code class="sig-prename descclassname">idpmodem.nmea.</code><code class="sig-name descname">validate_nmea_checksum</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sentence</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>bool<span class="p">, </span>str<span class="p">]</span><a class="headerlink" href="#idpmodem.nmea.validate_nmea_checksum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validates NMEA sentence using checksum according to the standard.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>sentence</strong> – NMEA sentence including checksum</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A tuple with Boolean result (checksum correct) and
+raw NMEA data string, with prefix $Gx and checksum suffix removed</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-idpmodem.message">
+<span id="message"></span><h2>message<a class="headerlink" href="#module-idpmodem.message" title="Permalink to this headline">¶</a></h2>
+<p>Message classes for abstracting messages presented by/to the AT commands.</p>
+<dl class="py class">
+<dt id="idpmodem.message.Message">
+<em class="property">class </em><code class="sig-prename descclassname">idpmodem.message.</code><code class="sig-name descname">Message</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">payload</span></em>, <em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">msg_sin</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>int<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">msg_min</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>int<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">priority</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">4</span></em>, <em class="sig-param"><span class="n">data_format</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">2</span></em>, <em class="sig-param"><span class="n">size</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>int<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">logger</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>logging.Logger<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">debug</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#idpmodem.message.Message" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class intended for abstracting message attributes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>payload</strong> – <p>one of the following:</p>
+<ul>
+<li><p>(bytearray) including SIN and MIN bytes as first 2 in the array if not explicitly set in the call</p></li>
+<li><p>(list) of integer bytes (0..255) including SIN and MIN if not specified explicitly in the call</p></li>
+<li><p>(string) ASCII-HEX which includes SIN and MIN if not specified explicitly in the call</p></li>
+<li><p>(string) Text which requires both SIN and MIN explictly specified in the call</p></li>
+</ul>
+</p></li>
+<li><p><strong>name</strong> – (string) optional up to 8 characters. A message name will be generated if not supplied</p></li>
+<li><p><strong>msg_sin</strong> – integer (0..255)</p></li>
+<li><p><strong>msg_min</strong> – integer (0..255)</p></li>
+<li><p><strong>priority</strong> – (1=high, 4=low, 0=mobile-terminated)</p></li>
+<li><p><strong>data_format</strong> – (optional) 1=FORMAT_TEXT, 2=FORMAT_HEX, 3=FORMAT_B64</p></li>
+<li><p><strong>log</strong> – (optional) logger object</p></li>
+<li><p><strong>debug</strong> – (optional) sets logging level to DEBUG</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="idpmodem.message.Message.data">
+<code class="sig-name descname">data</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data_format</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">include_min</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">include_sin</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#idpmodem.message.Message.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the data content of the message</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_format</strong> – (int) 1=FORMAT_TEXT, 2=FORMAT_HEX (default), 3=FORMAT_B64</p></li>
+<li><p><strong>include_min</strong> – (boolean) whether to include MIN byte in the data (used when not specifying MIN explicitly)</p></li>
+<li><p><strong>include_sin</strong> – (boolean) whether to include SIN byte (not part of data for MO messages)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>data as a string for submission using AT%MGRT</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="idpmodem.message.MobileOriginatedMessage">
+<em class="property">class </em><code class="sig-prename descclassname">idpmodem.message.</code><code class="sig-name descname">MobileOriginatedMessage</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">payload</span></em>, <em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">data_format</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">msg_sin</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">msg_min</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#idpmodem.message.MobileOriginatedMessage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Subclass of Message containing Mobile Originated (aka Return) message properties.
+Mobile-Originated state (starting=None) is represented as an attribute:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">UNAVAILABLE</span></code>: 0</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">TX_READY</span></code>: 4</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">TX_SENDING</span></code>: 5</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">TX_COMPLETE</span></code>: 6</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">TX_FAILED</span></code>: 7</p></li>
+</ul>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – (string) user identifier for the message</p></li>
+<li><p><strong>payload</strong> – follows the structure of the Message superclass</p></li>
+<li><p><strong>data_format</strong> – follows the structure of the Message superclass</p></li>
+<li><p><strong>msg_sin</strong> – Service Identification Number (1st byte of payload)</p></li>
+<li><p><strong>msg_min</strong> – Message Identification Number (2nd byte of payload)</p></li>
+<li><p><strong>kwargs</strong> – follows the structure of the Message superclass</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt id="idpmodem.message.MobileTerminatedMessage">
+<em class="property">class </em><code class="sig-prename descclassname">idpmodem.message.</code><code class="sig-name descname">MobileTerminatedMessage</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">payload</span></em>, <em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">data_format</span></em>, <em class="sig-param"><span class="n">msg_num</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">priority</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#idpmodem.message.MobileTerminatedMessage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Subclass of Message containing Mobile-Terminated (MT aka Forward) message properties.
+Initializes MT message with state = <code class="docutils literal notranslate"><span class="pre">RX_RETRIEVED</span></code>
+MT message state represented as an attribute:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">UNAVAILABLE</span></code>: 0</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">COMPLETE</span></code>: 2</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">RETRIEVED</span></code>: 3</p></li>
+</ul>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – (string) name assigned by the modem</p></li>
+<li><p><strong>payload</strong> – follows the structure of the Message superclass</p></li>
+<li><p><strong>data_format</strong> – follows the structure of the Message superclass</p></li>
+<li><p><strong>msg_num</strong> – (string) message number assigned by the modem (unused)</p></li>
+<li><p><strong>priority</strong> – (int) always 0 for MT messages</p></li>
+<li><p><strong>kwargs</strong> – follows the structure of the Message superclass</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-idpmodem.codecs.common">
+<span id="codecs"></span><h2>codecs<a class="headerlink" href="#module-idpmodem.codecs.common" title="Permalink to this headline">¶</a></h2>
+<p>Codec functions for IDP Common Message Format supported by Inmarsat MGS.</p>
+<dl class="py class">
+<dt id="idpmodem.codecs.common.CommonMessageFormat">
+<em class="property">class </em><code class="sig-prename descclassname">idpmodem.codecs.common.</code><code class="sig-name descname">CommonMessageFormat</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">sin</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">min</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">description</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">is_forward</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#idpmodem.codecs.common.CommonMessageFormat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Included for backward compatibility, replaced by Message.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="idpmodem.codecs.common.Field">
+<em class="property">class </em><code class="sig-prename descclassname">idpmodem.codecs.common.</code><code class="sig-name descname">Field</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">data_type</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">value</span><span class="p">:</span> <span class="n">any</span></em>, <em class="sig-param"><span class="n">value_range</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>tuple<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">bits</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>int<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">description</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">optional</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">fixed</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>bool<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">default</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>any<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">size</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>int<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">fields</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>list<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#idpmodem.codecs.common.Field" title="Permalink to this definition">¶</a></dt>
+<dd><p>A data field within a Common Message Format message.</p>
+<dl class="py attribute">
+<dt id="idpmodem.codecs.common.Field.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#idpmodem.codecs.common.Field.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>The field name</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="idpmodem.codecs.common.Field.data_type">
+<code class="sig-name descname">data_type</code><a class="headerlink" href="#idpmodem.codecs.common.Field.data_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>A supported data type for encoding/decoding</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="idpmodem.codecs.common.Field.value">
+<code class="sig-name descname">value</code><a class="headerlink" href="#idpmodem.codecs.common.Field.value" title="Permalink to this definition">¶</a></dt>
+<dd><p>The value which is type dependent</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>any</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="idpmodem.codecs.common.Field.value_range">
+<code class="sig-name descname">value_range</code><a class="headerlink" href="#idpmodem.codecs.common.Field.value_range" title="Permalink to this definition">¶</a></dt>
+<dd><p>The min, max of allowed values or enum strings</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="idpmodem.codecs.common.Field.bits">
+<code class="sig-name descname">bits</code><a class="headerlink" href="#idpmodem.codecs.common.Field.bits" title="Permalink to this definition">¶</a></dt>
+<dd><p>size in bits</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="idpmodem.codecs.common.Field.description">
+<code class="sig-name descname">description</code><a class="headerlink" href="#idpmodem.codecs.common.Field.description" title="Permalink to this definition">¶</a></dt>
+<dd><p>An optional description</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="idpmodem.codecs.common.Field.optional">
+<code class="sig-name descname">optional</code><a class="headerlink" href="#idpmodem.codecs.common.Field.optional" title="Permalink to this definition">¶</a></dt>
+<dd><p>Indicates if the field is optional</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="idpmodem.codecs.common.Field.fixed">
+<code class="sig-name descname">fixed</code><a class="headerlink" href="#idpmodem.codecs.common.Field.fixed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Indicates if the field size is fixed (or variable)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="idpmodem.codecs.common.Field.get_xml">
+<code class="sig-name descname">get_xml</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; xml.etree.ElementTree.Element<a class="headerlink" href="#idpmodem.codecs.common.Field.get_xml" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the XML definition of the field.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="idpmodem.codecs.common.Fields">
+<em class="property">class </em><code class="sig-prename descclassname">idpmodem.codecs.common.</code><code class="sig-name descname">Fields</code><a class="headerlink" href="#idpmodem.codecs.common.Fields" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt id="idpmodem.codecs.common.Fields.add">
+<code class="sig-name descname">add</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">field</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#idpmodem.codecs.common.Field" title="idpmodem.codecs.common.Field">idpmodem.codecs.common.Field</a></span></em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#idpmodem.codecs.common.Fields.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a field to the list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>field</strong> (<em>object</em>) – A valid Field</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>ValueError if there is a duplicate</strong><strong> or </strong><strong>invalid name</strong><strong>,</strong> – invalid value_range or unsupported data_type</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="idpmodem.codecs.common.Message">
+<em class="property">class </em><code class="sig-prename descclassname">idpmodem.codecs.common.</code><code class="sig-name descname">Message</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">sin</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">min</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">description</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">is_forward</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#idpmodem.codecs.common.Message" title="Permalink to this definition">¶</a></dt>
+<dd><p>The Payload structure for Message Definition Files uploaded to a Mailbox.</p>
+<dl class="py attribute">
+<dt id="idpmodem.codecs.common.Message.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#idpmodem.codecs.common.Message.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>The message name</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="idpmodem.codecs.common.Message.sin">
+<code class="sig-name descname">sin</code><a class="headerlink" href="#idpmodem.codecs.common.Message.sin" title="Permalink to this definition">¶</a></dt>
+<dd><p>The Service Identification Number</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="idpmodem.codecs.common.Message.min">
+<code class="sig-name descname">min</code><a class="headerlink" href="#idpmodem.codecs.common.Message.min" title="Permalink to this definition">¶</a></dt>
+<dd><p>The Message Identification Number</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="idpmodem.codecs.common.Message.fields">
+<code class="sig-name descname">fields</code><a class="headerlink" href="#idpmodem.codecs.common.Message.fields" title="Permalink to this definition">¶</a></dt>
+<dd><p>An array of Fields</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="idpmodem.codecs.common.Message.description">
+<code class="sig-name descname">description</code><a class="headerlink" href="#idpmodem.codecs.common.Message.description" title="Permalink to this definition">¶</a></dt>
+<dd><p>Optional description</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="idpmodem.codecs.common.Message.is_forward">
+<code class="sig-name descname">is_forward</code><a class="headerlink" href="#idpmodem.codecs.common.Message.is_forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Indicates if the message is mobile-terminated</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="idpmodem.codecs.common.Message.decode">
+<code class="sig-name descname">decode</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">databytes</span><span class="p">:</span> <span class="n">bytes</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#idpmodem.codecs.common.Message.decode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decodes field values from raw data bytes (received over-the-air).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>databytes</strong> – A bytes array (typically from the forward message)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="idpmodem.codecs.common.Message.derive">
+<code class="sig-name descname">derive</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">databytes</span><span class="p">:</span> <span class="n">bytes</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#idpmodem.codecs.common.Message.derive" title="Permalink to this definition">¶</a></dt>
+<dd><p>Derives field values from raw data bytes (received over-the-air).</p>
+<p>Deprecated/replaced by <cite>decode</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>databytes</strong> – A bytes array (typically from the forward message)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="idpmodem.codecs.common.Message.encode">
+<code class="sig-name descname">encode</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data_format</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">3</span></em>, <em class="sig-param"><span class="n">exclude</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>list<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#idpmodem.codecs.common.Message.encode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Encodes using the specified data format (base64 or hex).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data_format</strong> (<em>int</em>) – 2=ASCII-Hex, 3=base64</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Dictionary with sin, min, data_format and data to pass into AT%MGRT</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="idpmodem.codecs.common.Message.get_xml">
+<code class="sig-name descname">get_xml</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#idpmodem.codecs.common.Message.get_xml" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the XML definition for a Message Definition File.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="idpmodem.codecs.common.MessageDefinitions">
+<em class="property">class </em><code class="sig-prename descclassname">idpmodem.codecs.common.</code><code class="sig-name descname">MessageDefinitions</code><a class="headerlink" href="#idpmodem.codecs.common.MessageDefinitions" title="Permalink to this definition">¶</a></dt>
+<dd><p>A set of Message Definitions grouped into Services.</p>
+<dl class="py attribute">
+<dt id="idpmodem.codecs.common.MessageDefinitions.services">
+<code class="sig-name descname">services</code><a class="headerlink" href="#idpmodem.codecs.common.MessageDefinitions.services" title="Permalink to this definition">¶</a></dt>
+<dd><p>The list of Services with Messages defined.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="idpmodem.codecs.common.Messages">
+<em class="property">class </em><code class="sig-prename descclassname">idpmodem.codecs.common.</code><code class="sig-name descname">Messages</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sin</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">is_forward</span><span class="p">:</span> <span class="n">bool</span></em><span class="sig-paren">)</span><a class="headerlink" href="#idpmodem.codecs.common.Messages" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt id="idpmodem.codecs.common.ObjectList">
+<em class="property">class </em><code class="sig-prename descclassname">idpmodem.codecs.common.</code><code class="sig-name descname">ObjectList</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">list_type</span><span class="p">:</span> <span class="n">object</span></em><span class="sig-paren">)</span><a class="headerlink" href="#idpmodem.codecs.common.ObjectList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base class for a specific object type list.</p>
+<p>Used for Fields, Messages, Services.</p>
+<dl class="py attribute">
+<dt id="idpmodem.codecs.common.ObjectList.list_type">
+<code class="sig-name descname">list_type</code><a class="headerlink" href="#idpmodem.codecs.common.ObjectList.list_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>The object type the list is comprised of.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="idpmodem.codecs.common.ObjectList.add">
+<code class="sig-name descname">add</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj</span><span class="p">:</span> <span class="n">object</span></em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#idpmodem.codecs.common.ObjectList.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add an object to the list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>obj</strong> (<em>object</em>) – A valid object according to the list_type</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>ValueError if there is a duplicate</strong><strong> or </strong><strong>invalid name</strong><strong>,</strong> – invalid value_range or unsupported data_type</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="idpmodem.codecs.common.ObjectList.delete">
+<code class="sig-name descname">delete</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#idpmodem.codecs.common.ObjectList.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete an object from the list by name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> – The name of the object.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>success</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>boolean</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="idpmodem.codecs.common.Services">
+<em class="property">class </em><code class="sig-prename descclassname">idpmodem.codecs.common.</code><code class="sig-name descname">Services</code><a class="headerlink" href="#idpmodem.codecs.common.Services" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-idpmodem.utils">
+<span id="utils"></span><h2>utils<a class="headerlink" href="#module-idpmodem.utils" title="Permalink to this headline">¶</a></h2>
+<p>Helpers for operating a headless device for example Raspberry Pi.</p>
+<dl class="py class">
+<dt id="idpmodem.utils.RepeatingTimer">
+<em class="property">class </em><code class="sig-prename descclassname">idpmodem.utils.</code><code class="sig-name descname">RepeatingTimer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">seconds</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">target</span><span class="p">:</span> <span class="n">Callable</span></em>, <em class="sig-param"><span class="n">args</span><span class="p">:</span> <span class="n">Tuple</span> <span class="o">=</span> <span class="default_value">()</span></em>, <em class="sig-param"><span class="n">kwargs</span><span class="p">:</span> <span class="n">dict</span> <span class="o">=</span> <span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">logger</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>logging.Logger<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">log_level</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">20</span></em>, <em class="sig-param"><span class="n">sleep_chunk</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.25</span></em>, <em class="sig-param"><span class="n">max_drift</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>int<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">auto_start</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">defer</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">debug</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">daemon</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#idpmodem.utils.RepeatingTimer" title="Permalink to this definition">¶</a></dt>
+<dd><p>A repeating thread to call a function, can be stopped/restarted/changed.</p>
+<p>Embedded tasks can use threading for continuous repeated operations.  A
+<em>RepeatingTimer</em> can be started, stopped, restarted and reconfigured.</p>
+<p>A Thread that counts down seconds using sleep increments, then calls back
+to a function with any provided arguments.
+Optional auto_start feature starts the thread and the timer, in this case
+the user doesn’t need to explicitly start() then start_timer().</p>
+<dl class="py attribute">
+<dt id="idpmodem.utils.RepeatingTimer.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#idpmodem.utils.RepeatingTimer.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>An optional descriptive name for the Thread.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="idpmodem.utils.RepeatingTimer.interval">
+<code class="sig-name descname">interval</code><a class="headerlink" href="#idpmodem.utils.RepeatingTimer.interval" title="Permalink to this definition">¶</a></dt>
+<dd><p>Repeating timer interval in seconds (0=disabled).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="idpmodem.utils.RepeatingTimer.sleep_chunk">
+<code class="sig-name descname">sleep_chunk</code><a class="headerlink" href="#idpmodem.utils.RepeatingTimer.sleep_chunk" title="Permalink to this definition">¶</a></dt>
+<dd><p>The fraction of seconds between processing ticks.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="idpmodem.utils.RepeatingTimer.change_interval">
+<code class="sig-name descname">change_interval</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">seconds</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="headerlink" href="#idpmodem.utils.RepeatingTimer.change_interval" title="Permalink to this definition">¶</a></dt>
+<dd><p>Change the timer interval and restart it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>seconds</strong> (<em>int</em>) – The new interval in seconds.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>ValueError if seconds is not an integer.</strong> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="idpmodem.utils.RepeatingTimer.join">
+<code class="sig-name descname">join</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#idpmodem.utils.RepeatingTimer.join" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wait until the thread terminates.</p>
+<p>This blocks the calling thread until the thread whose join() method is
+called terminates – either normally or through an unhandled exception
+or until the optional timeout occurs.</p>
+<p>When the timeout argument is present and not None, it should be a
+floating point number specifying a timeout for the operation in seconds
+(or fractions thereof). As join() always returns None, you must call
+is_alive() after join() to decide whether a timeout happened – if the
+thread is still alive, the join() call timed out.</p>
+<p>When the timeout argument is not present or None, the operation will
+block until the thread terminates.</p>
+<p>A thread can be join()ed many times.</p>
+<p>join() raises a RuntimeError if an attempt is made to join the current
+thread as that would cause a deadlock. It is also an error to join() a
+thread before it has been started and attempts to do so raises the same
+exception.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="idpmodem.utils.RepeatingTimer.restart_timer">
+<code class="sig-name descname">restart_timer</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#idpmodem.utils.RepeatingTimer.restart_timer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Restart the repeating timer (after an interval change).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="idpmodem.utils.RepeatingTimer.run">
+<code class="sig-name descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#idpmodem.utils.RepeatingTimer.run" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Note: runs automatically, not meant to be called explicitly.</em></p>
+<p>Counts down the interval, checking every <code class="docutils literal notranslate"><span class="pre">sleep_chunk</span></code> for expiry.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="idpmodem.utils.RepeatingTimer.start_timer">
+<code class="sig-name descname">start_timer</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#idpmodem.utils.RepeatingTimer.start_timer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initially start the repeating timer.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="idpmodem.utils.RepeatingTimer.stop_timer">
+<code class="sig-name descname">stop_timer</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#idpmodem.utils.RepeatingTimer.stop_timer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stop the repeating timer.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="idpmodem.utils.RepeatingTimer.terminate">
+<code class="sig-name descname">terminate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#idpmodem.utils.RepeatingTimer.terminate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Terminate the timer. (Cannot be restarted)</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="idpmodem.utils.get_wrapping_logger">
+<code class="sig-prename descclassname">idpmodem.utils.</code><code class="sig-name descname">get_wrapping_logger</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">filename</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">file_size</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">5</span></em>, <em class="sig-param"><span class="n">max_files</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">2</span></em>, <em class="sig-param"><span class="n">debug</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">log_level</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">20</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span> &#x2192; logging.Logger<a class="headerlink" href="#idpmodem.utils.get_wrapping_logger" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets up a wrapping logger that writes to console and optionally a file.</p>
+<p>Logging is crucial for debugging embedded systems.  However you don’t want
+to fill up an embedded drive with log files, so a <em>wrapping_logger</em> is
+useful that:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Initializes logging to console, and optionally a CSV formatted file</p></li>
+<li><p>Log file wraps at a given maximum size (default 5 MB)</p></li>
+<li><p>Is easy to configure a logging level (default INFO)</p></li>
+<li><p>Uses UTC/GMT/Zulu timestamps</p></li>
+<li><dl class="simple">
+<dt>Provides a standardized CSV format</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">timestamp,[level],(thread),module.function:line,message</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – Name of the logger (if None, uses name of calling module).</p></li>
+<li><p><strong>filename</strong> – (optional) Name of the file/path if writing to a file.</p></li>
+<li><p><strong>file_size</strong> – Max size of the file in megabytes, before wrapping.</p></li>
+<li><p><strong>max_files</strong> – The maximum number of files in rotation.</p></li>
+<li><p><strong>debug</strong> – <em>backward compatible</em> enable DEBUG logging</p></li>
+<li><p><strong>log_level</strong> – A logging level (default INFO)</p></li>
+<li><p><strong>kwargs</strong> – Optional overrides for RotatingFileHandler</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A logger with console stream handler and (optional) file handler.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="indices-and-tables">
+<h2>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="#">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">idpmodem</span></code> Library Documentation</a><ul>
+<li><a class="reference internal" href="#module-idpmodem.atcommand_async">atcommand_async</a></li>
+<li><a class="reference internal" href="#module-idpmodem.aterror">aterror</a></li>
+<li><a class="reference internal" href="#module-idpmodem.nmea">nmea</a></li>
+<li><a class="reference internal" href="#module-idpmodem.message">message</a></li>
+<li><a class="reference internal" href="#module-idpmodem.codecs.common">codecs</a></li>
+<li><a class="reference internal" href="#module-idpmodem.utils">utils</a></li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">idpmodem 1.1.8 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="docutils literal notranslate"><span class="pre">idpmodem</span></code> Library Documentation</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Inmarsat.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.1.
+    </div>
+  </body>
+</html>
